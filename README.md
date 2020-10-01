@@ -11,8 +11,8 @@ Uploading to Redshift is a clunky multi-step process:
 Use pandas_redshift library (https://github.com/agawronski/pandas_redshift), which is a wrapper on `psycopg2` library.  However because the pandas_redshift library requires credentials (Redshift and IAM user), wrote some wrapper code for ease of code-reuse.
 
 pip install and import: 
-`pip install pandas_redshift`
-`import pandas_redshift as pr`
+* `pip install pandas_redshift`
+* `import pandas_redshift as pr`
 
 Two specific implementation details of Redshift:
 1. pandas_redshift library assumes the schema has been created
