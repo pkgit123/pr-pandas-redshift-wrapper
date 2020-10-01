@@ -66,7 +66,7 @@ def pr_pd_to_rs(df_upload, redshift_table_name,
     
 def pr_rs_to_pd(redshift_table_name, 
     str_s3bucket, str_s3subdirectory, 
-    str_dbname=str_dbname, str_host=str_host, str_port=str_port, str_user=str_user, str_pw=str_pw
+    str_dbname, str_host, str_port, str_user, str_pw
     ):
     '''
     Download Redshift table to pandas dataframe.
@@ -79,6 +79,8 @@ def pr_rs_to_pd(redshift_table_name,
         import pandas_redshift as pr
     Input:
         redshift_table_name - str, redshift table name of upload destination 
+        str_s3bucket - str, S3 bucket name to store CSV files
+        str_s3subdirectory - str, S3 folder to store CSV files
         str_dbname - str, Redshift database 
         str_host - str, Redshift host address
         str_port - str, Redshift port number
