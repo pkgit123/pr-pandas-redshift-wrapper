@@ -6,6 +6,7 @@ def pr_pd_to_rs(df_upload, redshift_table_name,
     ):
     '''
     Upload pandas dataframe to Redshift table.
+    
     Redshift has 3 layers: database, schema, table.
         Our syntax combines schema and table into single str.  
             However, if the schema doesn't exist, create in SQL/Aginity:
@@ -65,11 +66,12 @@ def pr_pd_to_rs(df_upload, redshift_table_name,
     
     
 def pr_rs_to_pd(redshift_table_name, 
-    str_s3bucket, str_s3subdirectory, 
     str_dbname, str_host, str_port, str_user, str_pw
     ):
     '''
+    
     Download Redshift table to pandas dataframe.
+    
     Redshift has 3 layers: database, schema, table.
         Our syntax combines schema and table into single str.  
             However, if the schema doesn't exist, create in SQL/Aginity:
@@ -79,13 +81,13 @@ def pr_rs_to_pd(redshift_table_name,
         import pandas_redshift as pr
     Input:
         redshift_table_name - str, redshift table name of upload destination 
-        str_s3bucket - str, S3 bucket name to store CSV files
-        str_s3subdirectory - str, S3 folder to store CSV files
         str_dbname - str, Redshift database 
         str_host - str, Redshift host address
         str_port - str, Redshift port number
         str_user - str, Redshift username credential
         str_pw - str, Redshift password credential
+    Return:
+        df_download - pandas dataframe, downloaded from Redshift table
     '''
 
     # create pandas-redshift connection
