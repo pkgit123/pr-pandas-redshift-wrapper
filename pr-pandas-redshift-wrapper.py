@@ -28,10 +28,13 @@ def pr_pd_to_rs(df_upload, redshift_table_name,
         str_accesskeyid - str, AWS IAM username access key
         str_secretaccesskey - str, AWS IAM username secret access key
     '''
+    # create copy of dataframe to avoid changing original dataframe
+    df_upload_copy = df_upload.copy()
+    
     # Redshift cannot have column name 'Timestamp', so convert pandas column name if exists
-    if 'timestamp' in [x.lower() for x in df_upload.columns]:
-        ls_new_cols = ['ts_rename_timestamp' if x.lower()=='timestamp' else x for x in df_upload.columns]
-        df_upload.columns = ls_new_cols
+    if 'timestamp' in [x.lower() for x in df_upload_copy.columns]:
+        ls_new_cols = ['ts_rename_timestamp' if x.lower()=='timestamp' else x for x in df_upload_copy.columns]
+        df_upload_copy.columns = ls_new_cols
     
     # create pandas-redshift connection
     pr.connect_to_redshift(dbname=str_dbname, host=str_host, port=str_port, user=str_user, password=str_pw)
@@ -46,7 +49,7 @@ def pr_pd_to_rs(df_upload, redshift_table_name,
                     )
     
     # Write the DataFrame to S3 and then to redshift
-    pr.pandas_to_redshift(data_frame = df_upload, 
+    pr.pandas_to_redshift(data_frame = df_upload_copy, 
                           redshift_table_name = redshift_table_name)
     
     if flag_print:
